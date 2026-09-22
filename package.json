@@ -1,0 +1,28 @@
+{
+  "name": "assignment-portal",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm --workspace backend run dev",
+    "dev:web": "npm --workspace frontend run dev",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:migrate": "npm --workspace backend run db:migrate",
+    "db:seed": "npm --workspace backend run db:seed",
+    "db:setup": "npm run db:migrate && npm run db:seed",
+    "typecheck": "npm --workspace backend run typecheck && npm --workspace frontend run typecheck",
+    "test": "npm --workspace backend run test && npm --workspace frontend run test",
+    "verify": "npm run typecheck && npm run test",
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "build": "npm --workspace frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "playwright": "^1.63.0"
+  }
+}
