@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { tokenStore } from '../api/client';
+import { ApiError, tokenStore } from '../api/client';
 import { authApi } from '../api/endpoints';
 import type { User, UserRole } from '../api/types';
 
@@ -40,19 +40,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     let active = true;
-    authApi
-      .me()
-      .then((result) => {
-        if (!active) return;
-        setUser(result.user);
-        setLoading(false);
-      })
-      .catch(() => {
-        if (!active) return;
-        tokenStore.clear();
-        setUser(null);
-        setLoading(false);
-      });
+
+    const verify = async (): Promise<void> => {
+      try {
+        const result = await authApi.me();
+        if (active) setUser(result.user);
+      } catch (error) {
+        // Only a rejected token ends the session. A restarted or unreachable API
+        // is a blip, and signing someone out for it would lose their work in
+        // progress, so try once more before leaving the token in place.
+        const rejected =
+          error instanceof ApiError && (error.status === 401 || error.status === 403);
+        if (!rejected) {
+          try {
+            const retry = await authApi.me();
+            if (active) setUser(retry.user);
+            return;
+          } catch {
+            // Still down. Keep the token and let the next page load try again.
+          }
+        } else {
+          tokenStore.clear();
+          if (active) setUser(null);
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+
+    void verify();
 
     return () => {
       active = false;
