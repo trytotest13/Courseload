@@ -30,7 +30,7 @@ export function validateLoginPassword(value: string): string | null {
 export interface Strength {
   score: number;
   label: string;
-  bar: string;
+  tone: 'overdue' | 'pending' | 'submitted' | 'acknowledged';
 }
 
 export function passwordStrength(value: string): Strength {
@@ -43,9 +43,9 @@ export function passwordStrength(value: string): Strength {
 
   const capped = Math.min(score, 4) as 0 | 1 | 2 | 3 | 4;
   const labels = ['Too short', 'Getting there', 'Reasonable', 'Strong', 'Very strong'];
-  const bars = ['bg-line', 'bg-status-overdue', 'bg-status-pending', 'bg-status-submitted', 'bg-primary'];
+  const tones: Array<Strength['tone']> = ['overdue', 'overdue', 'pending', 'submitted', 'acknowledged'];
 
-  return { score: capped, label: labels[capped], bar: bars[capped] };
+  return { score: capped, label: labels[capped], tone: tones[capped] };
 }
 
 export function validateLink(value: string): string | null {

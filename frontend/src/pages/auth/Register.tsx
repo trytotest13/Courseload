@@ -136,6 +136,7 @@ export function RegisterPage() {
             <div className="mt-2 flex items-center gap-2.5">
               <ProgressBar
                 value={(strength.score / 4) * 100}
+                tone={strength.tone}
                 className="flex-1"
                 thickness="thin"
                 label="Password strength"
