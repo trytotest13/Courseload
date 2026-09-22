@@ -30,7 +30,17 @@ async function signIn(credentials) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(credentials),
   });
-  if (!response.ok) throw new Error('could not sign in as ' + credentials.email);
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => null);
+    const detail = body?.error?.message ?? 'no message';
+    const hint =
+      response.status === 429
+        ? '\nThe API rate limits sign ins per address (AUTH_RATE_LIMIT, 40 by default over fifteen minutes).\nWait for the window to pass, restart the API to clear the in memory store, or raise the limit.'
+        : '';
+    throw new Error('could not sign in as ' + credentials.email + ' (' + response.status + ': ' + detail + ')' + hint);
+  }
+
   return response.json();
 }
 

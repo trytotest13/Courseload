@@ -333,6 +333,7 @@ The seed creates two professors, eight students, three courses, seven assignment
 | `JWT_SECRET` | At least 16 characters. Changing it signs everybody out |
 | `JWT_EXPIRES_IN` | Token lifetime, `7d` by default |
 | `CLIENT_ORIGIN` | Comma separated list of allowed browser origins |
+| `AUTH_RATE_LIMIT` | Sign in attempts per address per 15 minutes, 40 by default. Raise it for a demo run, keep it low in production |
 
 `frontend/.env`
 
@@ -385,6 +386,8 @@ npm run screenshots
 ```
 
 The script signs in through the API, finds the interesting rows by title, then visits every page and writes full page images into `docs/screenshots`. Change `WEB_URL` or `API_URL` to point at a deployed environment.
+
+One caveat: sign ins are rate limited, so running it repeatedly in a short window will trip the limit and the script will say so. Restart the API to clear the in memory counter, or raise `AUTH_RATE_LIMIT` for the run.
 
 ---
 
