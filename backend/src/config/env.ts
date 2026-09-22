@@ -9,6 +9,9 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(16, 'JWT_SECRET must be at least 16 characters'),
   JWT_EXPIRES_IN: z.string().default('7d'),
   CLIENT_ORIGIN: z.string().default('http://localhost:5173'),
+  // Sign in attempts allowed per address per fifteen minutes. Raise it when a
+  // script or a demo run needs more, keep it tight in production.
+  AUTH_RATE_LIMIT: z.coerce.number().int().positive().catch(40),
 });
 
 const parsed = envSchema.safeParse(process.env);
