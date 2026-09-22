@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background: rgba(14, 107, 92, 0.12);
+  }
+
+  :focus-visible {
+    outline: 2px solid #0e6b5c;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Anyone who asks for less motion gets a page that simply sits still. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-line bg-surface shadow-card;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-[0.8rem] font-semibold text-ink-soft;
+  }
+
+  .field-input {
+    @apply w-full rounded-field border border-line bg-surface px-3.5 py-2.5 text-[0.94rem] text-ink transition placeholder:text-ink-faint hover:border-ink-faint focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10 disabled:cursor-not-allowed disabled:bg-paper disabled:text-ink-faint;
+  }
+
+  .field-error {
+    @apply mt-1.5 text-[0.8rem] font-medium text-status-overdue;
+  }
+
+  .label-micro {
+    @apply text-micro font-semibold uppercase text-ink-faint;
+  }
+
+  .link {
+    @apply font-semibold text-primary underline-offset-2 transition hover:text-primary-dark hover:underline;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-line/70;
+  }
+
+  .skeleton::after {
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent;
+    content: '';
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
