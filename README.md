@@ -3,7 +3,7 @@
 Course assignments, submissions and acknowledgements for students and professors.
 Round 2 full stack task: React + Tailwind frontend, Node + Express + PostgreSQL backend, JWT auth, group work where only the group leader acknowledges.
 
---- 
+---
 
 ## Table of contents
 
@@ -522,6 +522,4 @@ Roughly six minutes, recorded in this order. Log in as the professor for the odd
 6. **Sign in as the professor.** Show the dashboard numbers, then open an assignment and walk the submission table: filter to awaiting confirmation, search a name, open the grade dialog on a hand in, save a grade, and show the activity feed pick it up.
 7. **Create an assignment.** Set the type to group, add a team, pick a leader, save, and show the new assignment open with its tallies.
 8. **Close on the profile page and the mobile view**, and mention the two commands that bring the whole thing up: `npm run db:up` and `npm run dev`.
-#   C o u r s e l o a d 
- 
- 
+#
