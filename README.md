@@ -94,32 +94,36 @@ The leader screenshot above shows the acknowledge button. The same page for a gr
 
 ### Colour
 
-The palette starts from paper and ink rather than the blue and violet that most dashboards reach for.
+The palette is grounded in university paperwork, with Lightswind's Amethyst theme as the primary, rather than the warm cream plus terracotta combination that has become the default look of generated dashboards.
 
 | Token | Value | Used for |
 | --- | --- | --- |
-| paper | `#F7F5F0` | App background |
+| paper | `#F2F1F5` | App background (cool porcelain) |
 | surface | `#FFFFFF` | Cards, inputs, dialogs |
-| ink | `#171A19` | Body text |
-| ink-soft | `#5C6360` | Secondary text |
-| line | `#E4E0D8` | Borders and dividers |
-| primary | `#0E6B5C` | Buttons, links, focus ring |
-| accent | `#C8794A` | Group work and leader marks |
-| pending | `#A8650C` on `#FBF1DC` | Waiting on the student |
+| ink | `#1B1927` | Body text (violet ink) |
+| ink-soft | `#57536B` | Secondary text |
+| line | `#E2DFEC` | Borders and dividers |
+| primary | `#8B5CF6` | Buttons, links, focus ring (amethyst) |
+| accent | `#C13B62` | Group work and leader marks (registry crimson) |
+| pending | `#8A5A10` on `#F9F0DC` | Waiting on the student |
 | submitted | `#1D5FA8` on `#E8F0FA` | Handed in |
 | acknowledged | `#1B7A45` on `#E7F4EC` | Confirmed |
 | overdue | `#A62B2B` on `#FBEAEA` | Past the deadline |
 
 Reasons:
 
-- Warm neutrals read as paper, so a screen full of cards still looks calm at 8am.
-- A deep teal primary gives a clear single action colour, and nothing competes with the status colours.
+- Cool porcelain and violet ink read like exam papers and course registers, the subject's own materials, while the amethyst primary keeps the interface current.
+- Amethyst gives a clear single action colour, and the crimson is spent only on group work marks and warnings, so nothing competes with the status colours.
 - Every status is a dark ink on a pale tint of itself, which holds up against WCAG AA body text contrast instead of the usual pale pill on white.
-- Courses carry their own accent (teal, ochre, plum, moss, slate) so a grid of six courses is still scannable.
+- Courses carry their own accent (blue, ochre, plum, moss, violet) as a margin tab on the card edge, like a register's thumb tabs, so a grid of six courses is still scannable.
+
+### The registry rule
+
+One signature element carries the identity: the thick-thin double rule printed across exam papers and registers. It sits above every page header and on the sign-in panel, and nowhere else. Spending the boldness in one place keeps everything around it quiet.
 
 ### Type
 
-- **Fraunces** for headings and numbers. A serif display face reads as course material rather than app furniture, and it does most of the work of making the pages feel made by a person.
+- **Newsreader** for headings and numbers. An editorial serif with real text optical sizing, it reads as course material rather than app furniture.
 - **Plus Jakarta Sans** for the interface. Open apertures and a tall x-height keep 13 to 15px labels legible.
 - **IBM Plex Mono** for course codes, timestamps and counts, because those are data and should look like data.
 
@@ -128,8 +132,8 @@ Scale: display 40/30px, h1 30px, h2 22px, h3 17px, body 15/1.6, small 13px, labe
 ### Layout and motion
 
 - Container capped at 1180px, 4px spacing base, cards on a 1 / 2 / 3 column grid depending on width.
-- Radius 10px for inputs, 14px for cards, pills for statuses. One shadow token, used only to lift a card off the paper.
-- Motion is small and purposeful: cards fade up in a 40ms stagger, progress bars fill over 400ms, checkmarks pop when they arrive, and everything is wrapped in `prefers-reduced-motion` so the page sits still when asked.
+- Radius 8px for inputs, 12px for cards, pills for statuses. One shadow token, used only to lift a card off the paper.
+- Motion follows a few strict rules: transitions name exact properties (never `all`), buttons answer a press with a 150ms scale(0.98), cards fade up in a 40ms stagger, progress bars fill over 400ms, checkmarks pop when they arrive, and everything is wrapped in `prefers-reduced-motion` so the page sits still when asked.
 - Mobile under 1024px gets a top bar, a bottom tab bar, and the same content stacked. Nothing is hidden behind a hamburger that matters.
 
 ### Copy
@@ -518,3 +522,5 @@ Roughly six minutes, recorded in this order. Log in as the professor for the odd
 6. **Sign in as the professor.** Show the dashboard numbers, then open an assignment and walk the submission table: filter to awaiting confirmation, search a name, open the grade dialog on a hand in, save a grade, and show the activity feed pick it up.
 7. **Create an assignment.** Set the type to group, add a team, pick a leader, save, and show the new assignment open with its tallies.
 8. **Close on the profile page and the mobile view**, and mention the two commands that bring the whole thing up: `npm run db:up` and `npm run dev`.
+#   C o u r s e l o a d  
+ 
